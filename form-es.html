@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>American Debt Relief</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style.min.css" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="https://usfinancerelief.org/wp-content/uploads/2024/04/cropped-icon-32x32.png"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <script>
+            function submitForm() {
+                document.getElementById("applyForm").style.display = "none";
+                document.getElementById("applied").style.display = "block";
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const phoneInput = document.getElementById("phoneInput");
+
+                phoneInput.addEventListener("focus", function () {
+                    if (!phoneInput.value.startsWith("+1")) {
+                        phoneInput.value = "+1 ";
+                    }
+                });
+
+                phoneInput.addEventListener("input", function () {
+                    if (!phoneInput.value.startsWith("+1")) {
+                        phoneInput.value =
+                            "+1 " + phoneInput.value.replace(/[^0-9]/g, "");
+                    }
+                });
+
+                function submitForm() {
+                    alert("Form submitted!");
+                }
+            });
+        </script>
+        <script src="scripts/mobile-menu.js" type="module"></script>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-container">
+                <img class="burger-menu" src="images/burger menu.png" alt="" />
+                <a href="index.html">
+                    <img src="images/logo.png" alt="" />
+                </a>
+                <div class="navigation">
+                    <div class="navigation-top">
+                        <img src="images/logo.png" alt="" />
+                        <img class="close" src="images/close.png" alt="" />
+                    </div>
+                    <a class="navigation-item active" href="index-es.html"
+                        >Inicio</a
+                    >
+                    <a class="navigation-item" href="student-es.html"
+                        >Préstamo de estudios</a
+                    >
+                    <a class="navigation-item" href="business-es.html"
+                        >préstamo empresarial</a
+                    >
+                    <a class="navigation-item" href="blog-es.html">BLOG</a>
+                    <a class="navigation-item" href="howitworks-es.html"
+                        >CÓMO FUNCIONA</a
+                    >
+                </div>
+                <a id="phoneLink" href="tel:" class="nav-button">Llámanos</a>
+            </div>
+        </nav>
+        <main>
+            <div class="form-container">
+                <h2 style="max-width: 545px">
+                    Da los siguientes pasos hacia la estabilidad financiera
+                </h2>
+
+                <form class="apply-form" action="" id="applyForm">
+                    <input
+                        class="apply-form-input"
+                        type="text"
+                        placeholder="Nombre"
+                    />
+                    <input
+                        class="apply-form-input"
+                        type="text"
+                        placeholder="Apellido"
+                    />
+                    <input
+                        class="apply-form-input"
+                        type="text"
+                        placeholder="Número de teléfono"
+                        id="phoneInput"
+                    />
+                    <input
+                        class="apply-form-input"
+                        type="email"
+                        placeholder="Dirección de correo electrónico"
+                    />
+
+                    <button
+                        class="form-submit"
+                        type="button"
+                        onclick="submitForm()"
+                    >
+                        Enviar
+                    </button>
+                </form>
+
+                <div class="applied" id="applied">
+                    <p>
+                        Tu información de contacto ha sido guardada.<br />
+                        <strong
+                            >Sus datos son confidenciales y sólo los utilizamos para ponernos en contacto con usted.</strong
+                        >
+                    </p>
+                    <a class="form-submit" href="tel:">Llámanos</a>
+                </div>
+
+                <p>
+                    Al hacer clic en “Enviar”, aceptas que el número de teléfono y la dirección de correo electrónico que proporcionas puedan ser utilizados para contactarte por American Debt Relief (incluyendo llamadas automatizadas/seleccionadas y pregrabadas, así como mensajes de texto/SMS). Se aplican tarifas de mensajes y datos, y tu consentimiento para dicho contacto/marketing no es necesario para realizar la compra. La frecuencia de los mensajes varía; máximo 2 mensajes por día y 7 mensajes por semana. También podemos enviarte correos electrónicos y podrás informarnos en cualquier momento si ya no deseas recibir comunicaciones a través de una plataforma específica.
+                </p>
+
+                <div class="awards-container">
+                    <img src="images/award1.png" alt="" />
+                    <img src="images/award2.png" alt="" />
+                    <img src="images/award3.png" alt="" />
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="form-footer-top">
+                <div class="form-footer-top-container">
+                    <h2>© 2025, American Debt Relief, Todos los derechos reservados.</h2>
+                    <p>
+                        Por favor, ten en cuenta que todas las llamadas con la empresa pueden ser grabadas o monitoreadas para fines de aseguramiento de calidad y capacitación. *Los clientes que puedan mantenerse en el programa y saldar toda su deuda logran un ahorro aproximado del 46% antes de tarifas, o del 25% incluyendo nuestras tarifas, en un plazo de 24 a 48 meses. Todas las reclamaciones se basan en las deudas inscritas. No todas las deudas son elegibles para inscripción. No todos los clientes completan nuestro programa por diversas razones, incluyendo su capacidad para ahorrar fondos suficientes. Las estimaciones se basan en resultados anteriores, que variarán según las circunstancias específicas. No garantizamos que tus deudas se reduzcan por una cantidad o porcentaje específico o que estarás libre de deudas dentro de un plazo determinado. No asumimos deudas del consumidor, no realizamos pagos mensuales a los acreedores ni proporcionamos asesoramiento fiscal, de quiebra, contable, legal o de reparación de crédito. No disponible en todos los estados. Por favor, contacta a un profesional tributario para discutir las consecuencias fiscales de la liquidación. Consulta con un abogado especializado en quiebra para obtener más información sobre la quiebra. Dependiendo de tu estado, podemos estar disponibles para recomendar un profesional tributario local y/o abogado especializado en quiebra. Lee y comprende todo el material del programa antes de inscribirte, incluyendo el posible impacto negativo en tu calificación crediticia.
+                    </p>
+                    <p>
+                        Este sitio web utiliza “cookies” para mejorar tu experiencia de navegación y con fines de marketing y seguimiento. Al continuar navegando por nuestro sitio, estás consintiendo su uso. Para más información, consulta nuestros Términos y Política de Privacidad.
+                    </p>
+                    <p>
+                        <strong>
+                            National Debt Relief LLC está licenciada por la Comisión de Corporaciones del Estado de Virginia. DSP-8.
+                        </strong>
+                    </p>
+                    <div class="footer-links">
+                        <a href="privacy-policy/index.html" target="_blank"
+                            >Política de privacidad</a
+                        >
+                        <a href="terms-of-service/index.html" target="_blank"
+                            >Términos del sitio</a
+                        >
+                        <a href="/" target="_blank">Descargo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer-bottom">
+                <div class="phone">
+                    <img src="images/phone.png" alt="" />
+                    <a href="tel:">800-300-9550</a> 
+                </div>
+                <p>729 Lake Shore Drive, 20th Floor, Chicago, IL 60611</p>
+            </div>
+        </footer>
+    </body>
+</html>
