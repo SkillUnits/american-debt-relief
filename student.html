@@ -48,29 +48,6 @@
 			type="module"></script>
 
 		<script>
-			// Функція для оновлення всіх посилань з певним id
-			function updateLinksWithPhone() {
-				const phoneNumber = localStorage.getItem("studentPhone") // Отримання номера з localStorage
-				if (!phoneNumber) {
-					console.log("Номер телефону відсутній у localStorage")
-					return
-				}
-
-				// Знаходимо всі посилання з id, наприклад, "phoneLink"
-				const links = document.querySelectorAll("#phoneLink")
-
-				links.forEach((link) => {
-					link.href = `tel:` + phoneNumber // Оновлюємо посилання
-				})
-
-				console.log("Посилання оновлено з номером:", phoneNumber)
-			}
-
-			// Викликати функцію після завантаження сторінки
-			document.addEventListener("DOMContentLoaded", updateLinksWithPhone)
-		</script>
-
-		<script>
 			;(function (w, d, s, o, f, js, fjs) {
 				w[o] =
 					w[o] ||
@@ -146,7 +123,7 @@
 				</div>
 				<a
 					id="phoneLink"
-					href="tel:"
+					href="tel:(855) 865-2710"
 					class="nav-button"
 					>Call us</a
 				>

@@ -143,7 +143,7 @@ function proceedToNextMessage() {
         setTimeout(showOperatorMessage, 500);
     } else {
         setTimeout(() => {
-            displayMessage("(888) 217-3304", "call");
+            displayMessage("(855) 865-2710", "call");
             scrollToBottom();
         }, 500);
     }
