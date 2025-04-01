@@ -30,101 +30,23 @@
         <script src="scripts/mobile-menu.js" type="module"></script>
 
         <script>
-            // Функція для отримання bid з URL
-            function getBidFromURL() {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get("bid"); // Отримання значення параметра "bid"
-            }
-
-            async function loadOffer(bid, type) {
-                try {
-                    const response = await fetch("offers/offers.json"); // Завантаження JSON
-                    const offers = await response.json(); // Перетворення в об'єкт
-
-                    if (offers[bid]) {
-                        // Отримання номерів телефону
-                        const creditCardPhone = offers[bid]["creditCard"];
-                        const studentPhone = offers[bid]["student"];
-                        const businessPhone = offers[bid]["business"];
-
-                        // Збереження в змінні
-                        console.log(`Credit Card Phone: ${creditCardPhone}`);
-                        console.log(`Student Phone: ${studentPhone}`);
-                        console.log(`Business Phone: ${businessPhone}`);
-
-                        // Збереження в localStorage
-                        localStorage.setItem(
-                            "creditCardPhone",
-                            creditCardPhone
-                        );
-                        localStorage.setItem("studentPhone", studentPhone);
-                        localStorage.setItem("businessPhone", businessPhone);
-                    } else {
-                        console.log("Офер не знайдено");
-                    }
-                } catch (error) {
-                    console.error("Помилка при завантаженні JSON:", error);
-                }
-            }
-
-            // Отримання bid з URL
-            const bid = getBidFromURL();
-            const type = "creditCard"; // Тип номера (creditCard, student, business)
-
-            if (bid) {
-                loadOffer(bid, type); // Викликаємо функцію тільки якщо bid знайдено
-            } else {
-                console.log("BID не знайдено в URL");
-            }
-
-            // Функція для оновлення всіх посилань з певним id
-            function updateLinksWithPhone() {
-                const phoneNumber = localStorage.getItem("creditCardPhone"); // Отримання номера з localStorage
-                if (!phoneNumber) {
-                    console.log("Номер телефону відсутній у localStorage");
-                    return;
-                }
-
-                // Знаходимо всі посилання з id, наприклад, "phoneLink"
-                const links = document.querySelectorAll("#phoneLink");
-
-                links.forEach((link) => {
-                    link.href = `tel:` + phoneNumber; // Оновлюємо посилання
-                });
-
-                console.log("Посилання оновлено з номером:", phoneNumber);
-            }
-
-            // Викликати функцію після завантаження сторінки
-            document.addEventListener("DOMContentLoaded", updateLinksWithPhone);
-        </script>
-
-        <script>
-            (function (w, d, s, o, f, js, fjs) {
-                w[o] =
-                    w[o] ||
-                    function () {
-                        (w[o].q = w[o].q || []).push(arguments);
-                    };
-                (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
-                js.id = o;
-                js.src = f;
-                js.async = 1;
-                fjs.parentNode.insertBefore(js, fjs);
-            })(
-                window,
-                document,
-                "script",
-                "mcc",
-                "https://marketcall.com/js/mc-calltracking.js"
-            );
-            mcc("init", { site: 816, serviceBaseUrl: "//www.marketcall.com" });
-
-            mcc("requestTrackingNumber", {
-                campaign: "309874",
-                mask: "(xxx) xxx-xx-xx",
-                subid: "{subid}",
-            });
+            (function (w,d,s,o,f,js,fjs) { w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; js = d.createElement(s), fjs = d.getElementsByTagName(s)[0]; js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);}(window, document, 'script', 'mcc', 'https://marketcall.com/js/mc-calltracking.js'));
+            
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var newsbreak_cid = url.searchParams.get("newsbreak_cid");
+    
+            mcc('init', { site: 816, serviceBaseUrl: '//www.marketcall.com' });
+            mcc('requestTrackingNumber', {campaign:"309874",selector:[{type:"dom",value:"a[href^='tel:']"}],mask:"(xxx) xxx-xx-xx",subid:"{subid}",subid1:"{tc_id}",subid2:newsbreak_cid});
+            </script>
+            <!-- Phone calls validation code -->
+            <!-- Install the code on all pages of your site -->
+            <script
+            id="__tc_script"
+            src="https://static.truecall.com/truecall.js"
+            data-campaign_uuid="06dqfudjo6fbl031kkou8z1762qzz1ds7hme"
+            data-skip_injection="true"
+            >
         </script>
     </head>
     <body>
@@ -139,10 +61,10 @@
                         <img src="images/logo.png" alt="" />
                         <img class="close" src="images/close.png" alt="" />
                     </div>
-                    <a class="navigation-item active" href="index-es.html"
+                    <a class="navigation-item" href="index-es.html"
                         >Inicio</a
                     >
-                    <a class="navigation-item" href="student-es.html"
+                    <a class="navigation-item active" href="student-es.html"
                         >Préstamo de estudios</a
                     >
                     <a class="navigation-item" href="business-es.html"
@@ -156,8 +78,8 @@
                 <a id="phoneLink" href="tel:" class="nav-button">Llámanos</a>
             </div>
         </nav>
-        <a href="support-es.html" class="support-button">
-            <img src="images/support icon.png" alt="" />
+        <a href="support.html" class="support-button">
+            <img loading="lazy" src="images/support icon.png" alt="" />
         </a>
         <header>
             <div class="header-swiper">
@@ -165,18 +87,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-1.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-1.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">Sarah S.</p>
+                                <p class="feedback-name">Emma L.</p>
                                 <p class="feedback-content">
-                                    “Deposité mi confianza en ellos y lo
-                                    gestionaron todo a la perfección: ¡ahora por
-                                    fin estoy libre de deudas!”
+                                    “Confié en ellos para mis préstamos estudiantiles, ¡y ahora finalmente estoy en el camino correcto!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -184,13 +109,13 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$34, 748</h2>
+                                        <h2 class="total-debt-num">$48, 500</h2>
                                     </div>
                                     <div class="payment">
-                                        <div class="payment-container red">
+                                        <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $2, 440
+                                                $2, 149
                                             </h2>
                                         </div>
                                         <svg
@@ -208,16 +133,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$572</h2>
+                                            <h2 class="debt-num">$1, 150</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">6 meses</h2>
+                                        <h2 class="debt-num">24 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    Sarah ahorró un 24% en sus deudas
+                                    Emma ahorró un 28% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -225,18 +150,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-2.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-2.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">Daniel B.</p>
+                                <p class="feedback-name">Michael R.</p>
                                 <p class="feedback-content">
-                                    “Su apoyo y experiencia marcaron toda la
-                                    diferencia. ¡Me siento libre
-                                    financieramente!”
+                                    “Me ayudaron a gestionar mis préstamos estudiantiles, ¡y ahora puedo concentrarme en mis estudios!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -244,13 +172,13 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$55, 700</h2>
+                                        <h2 class="total-debt-num">$60, 800</h2>
                                     </div>
                                     <div class="payment">
-                                        <div class="payment-container red">
+                                        <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $1, 050
+                                                $2, 819
                                             </h2>
                                         </div>
                                         <svg
@@ -268,16 +196,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$700</h2>
+                                            <h2 class="debt-num">$1, 210</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">10 meses</h2>
+                                        <h2 class="debt-num">48 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    Daniel ahorró un 33% en sus deudas
+                                    Michael ahorró un 30% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -285,18 +213,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-3.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-3.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">Sophia H.</p>
+                                <p class="feedback-name">Sophia M.</p>
                                 <p class="feedback-content">
-                                    “Convirtieron mi pesadilla financiera en un
-                                    plan manejable. ¡La mejor decisión que he
-                                    tomado!”
+                                    “Los préstamos estudiantiles eran abrumadores, pero ellos lo hicieron manejable. ¡Gracias!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -304,13 +235,13 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$68, 300</h2>
+                                        <h2 class="total-debt-num">$66, 000</h2>
                                     </div>
                                     <div class="payment">
                                         <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $1, 250
+                                                $2, 925
                                             </h2>
                                         </div>
                                         <svg
@@ -328,16 +259,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$780</h2>
+                                            <h2 class="debt-num">$1, 450</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">10 meses</h2>
+                                        <h2 class="debt-num">24 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    Sophia ahorró un 31% en sus deudas
+                                    Sophia ahorró un 27% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -345,18 +276,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-4.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-4.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">William C.</p>
+                                <p class="feedback-name">David S.</p>
                                 <p class="feedback-content">
-                                    “Gracias a ellos, ya no me estreso por las
-                                    deudas. ¡Finalmente puedo volver a
-                                    respirar!”
+                                    “Me ayudaron a reducir mis pagos, ¡y ahora puedo respirar tranquilo!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -364,71 +298,15 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$24, 453</h2>
-                                    </div>
-                                    <div class="payment">
-                                        <div class="payment-container">
-                                            <p>Pago mensual inicial</p>
-                                            <h2 class="debt-num red">$800</h2>
-                                        </div>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 25 25"
-                                        >
-                                            <path
-                                                style="fill: #ffffff"
-                                                d="m17.5 5.999-.707.707 5.293 5.293H1v1h21.086l-5.294 5.295.707.707L24 12.499l-6.5-6.5z"
-                                                data-name="Right"
-                                            />
-                                        </svg>
-                                        <div
-                                            class="payment-container"
-                                            style="min-width: 146px"
-                                        >
-                                            <p>Pago mensual</p>
-                                            <h2 class="debt-num">$500</h2>
-                                        </div>
-                                    </div>
-                                    <div class="payment-container">
-                                        <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">6 meses</h2>
-                                    </div>
-                                </div>
-                                <h2 class="feedback-conclusion">
-                                    William ahorró un 25% en sus deudas
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="feedback-card">
-                            <div class="left-side">
-                                <img src="images/feedback-5.jpg" alt="" />
-                            </div>
-                            <div class="right-side">
-                                <p class="feedback-name">Olivia M.</p>
-                                <p class="feedback-content">
-                                    “Al principio estaba escéptico, pero
-                                    cumplieron exactamente con lo que
-                                    prometieron. ¡Los recomiendo mucho!”
-                                </p>
-                                <a href="form-es.html" class="feedback-button">
-                                    Solicitar ahora
-                                    <img
-                                        src="images/arrows right circle.png"
-                                        alt=""
-                                    />
-                                </a>
-                                <div class="feedback-debt">
-                                    <div class="total-debt">
-                                        <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$80, 150</h2>
+                                        <h2 class="total-debt-num">
+                                            $101, 800
+                                        </h2>
                                     </div>
                                     <div class="payment">
                                         <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $1, 500
+                                                $3, 096
                                             </h2>
                                         </div>
                                         <svg
@@ -446,16 +324,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$990</h2>
+                                            <h2 class="debt-num">$1, 600</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">14 meses</h2>
+                                        <h2 class="debt-num">36 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    Olivia ahorró un 36% en sus deudas
+                                    David ahorró un 35% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -463,18 +341,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-6.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-5.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">James P.</p>
+                                <p class="feedback-name">Ann S.</p>
                                 <p class="feedback-content">
-                                    “¡Su equipo fue increíble! Negociaron con
-                                    mis acreedores y me ahorraron miles de
-                                    dólares.”
+                                    “Estaba luchando con la deuda estudiantil, ¡pero ellos encontraron la solución perfecta!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -482,13 +363,13 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$28, 900</h2>
+                                        <h2 class="total-debt-num">$91, 200</h2>
                                     </div>
                                     <div class="payment">
                                         <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $1, 210
+                                                $4, 042
                                             </h2>
                                         </div>
                                         <svg
@@ -506,16 +387,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$540</h2>
+                                            <h2 class="debt-num">$1, 920</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">7 meses</h2>
+                                        <h2 class="debt-num">24 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    James ahorró un 25% en sus deudas
+                                    Ann ahorró un 29% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -523,18 +404,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-7.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-6.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">Emily W.</p>
+                                <p class="feedback-name">Damon S.</p>
                                 <p class="feedback-content">
-                                    “La deuda se sentía abrumadora, pero ellos
-                                    me dieron un plan claro y esperanza para el
-                                    futuro.”
+                                    “¡Gracias a ellos, mis préstamos estudiantiles finalmente están bajo control!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -542,13 +426,15 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$32, 700</h2>
+                                        <h2 class="total-debt-num">
+                                            $114, 400
+                                        </h2>
                                     </div>
                                     <div class="payment">
                                         <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $1, 010
+                                                $2, 686
                                             </h2>
                                         </div>
                                         <svg
@@ -566,16 +452,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$640</h2>
+                                            <h2 class="debt-num">$950</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">8 meses</h2>
+                                        <h2 class="debt-num">48 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    Emily ahorró un 15% en sus deudas
+                                    Damon ahorró un 31% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -583,22 +469,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-8.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-7.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">Jessica R.</p>
-                                <p
-                                    class="feedback-content"
-                                    style="max-width: 500px"
-                                >
-                                    “Estaba ahogada en deudas, pero ellos me
-                                    ayudaron a recuperar el control de mis
-                                    finanzas. ¡Una experiencia que cambió mi
-                                    vida!”
+                                <p class="feedback-name">Isabella W.</p>
+                                <p class="feedback-content">
+                                    “Los préstamos estudiantiles me estaban estresando, ¡pero ellos lo hicieron todo manejable!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -606,13 +491,13 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$12,439</h2>
+                                        <h2 class="total-debt-num">$72, 000</h2>
                                     </div>
                                     <div class="payment">
                                         <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $1, 010
+                                                $3, 191
                                             </h2>
                                         </div>
                                         <svg
@@ -630,16 +515,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$640</h2>
+                                            <h2 class="debt-num">$1, 780</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">6 meses</h2>
+                                        <h2 class="debt-num">24 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    Jessica ahorró un 13% en sus deudas
+                                    Isabella ahorró un 26% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -647,18 +532,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-9.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-8.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">David L.</p>
+                                <p class="feedback-name">Lucas J.</p>
                                 <p class="feedback-content">
-                                    Profesionales y realmente serviciales, ¡me
-                                    ayudaron a reducir mi deuda más rápido de lo
-                                    que hubiera imaginado!
+                                    “No podía seguir el ritmo de los préstamos, ¡pero ellos me ayudaron a reducir los pagos!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -666,13 +554,15 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$75, 420</h2>
+                                        <h2 class="total-debt-num">
+                                            $124, 100
+                                        </h2>
                                     </div>
                                     <div class="payment">
                                         <div class="payment-container">
                                             <p>Pago mensual inicial</p>
                                             <h2 class="debt-num red">
-                                                $1, 200
+                                                $2, 399
                                             </h2>
                                         </div>
                                         <svg
@@ -690,16 +580,16 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$850</h2>
+                                            <h2 class="debt-num">$1, 000</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">12 meses</h2>
+                                        <h2 class="debt-num">60 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    David ahorró un 29% en sus deudas
+                                    Lucas ahorró un 34% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -707,18 +597,21 @@
                     <div class="swiper-slide">
                         <div class="feedback-card">
                             <div class="left-side">
-                                <img src="images/feedback-10.jpg" alt="" />
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-9.webp"
+                                    alt=""
+                                />
                             </div>
                             <div class="right-side">
-                                <p class="feedback-name">Michael T.</p>
+                                <p class="feedback-name">Ava T.</p>
                                 <p class="feedback-content">
-                                    “Me guiaron en cada paso del camino y
-                                    hicieron que el proceso fuera tan fácil.
-                                    ¡Estoy muy agradecida!”
+                                    “Gracias a ellos, ¡finalmente puedo concentrarme en mi futuro en lugar de en mis deudas!”
                                 </p>
-                                <a href="form-es.html" class="feedback-button">
+                                <a href="form.html" class="feedback-button">
                                     Solicitar ahora
                                     <img
+                                        loading="lazy"
                                         src="images/arrows right circle.png"
                                         alt=""
                                     />
@@ -726,12 +619,14 @@
                                 <div class="feedback-debt">
                                     <div class="total-debt">
                                         <p>Deuda total</p>
-                                        <h2 class="total-debt-num">$32, 750</h2>
+                                        <h2 class="total-debt-num">$96, 200</h2>
                                     </div>
                                     <div class="payment">
                                         <div class="payment-container">
                                             <p>Pago mensual inicial</p>
-                                            <h2 class="debt-num red">$900</h2>
+                                            <h2 class="debt-num red">
+                                                $2, 926
+                                            </h2>
                                         </div>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -748,16 +643,81 @@
                                             style="min-width: 146px"
                                         >
                                             <p>Pago mensual</p>
-                                            <h2 class="debt-num">$575</h2>
+                                            <h2 class="debt-num">$1, 690</h2>
                                         </div>
                                     </div>
                                     <div class="payment-container">
                                         <p>Deuda pagada en</p>
-                                        <h2 class="debt-num">10 meses</h2>
+                                        <h2 class="debt-num">36 meses</h2>
                                     </div>
                                 </div>
                                 <h2 class="feedback-conclusion">
-                                    Michael ahorró un 22% en sus deudas
+                                    Ava ahorró un 30% en sus deudas
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="feedback-card">
+                            <div class="left-side">
+                                <img
+                                    loading="lazy"
+                                    src="images/students/student-10.webp"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="right-side">
+                                <p class="feedback-name">Benjamin C.</p>
+                                <p class="feedback-content">
+                                    “Su apoyo hizo que pagar mis préstamos estudiantiles fuera mucho más fácil. ¡Estoy más que agradecido!”
+                                </p>
+                                <a href="form.html" class="feedback-button">
+                                    Solicitar ahora
+                                    <img
+                                        loading="lazy"
+                                        src="images/arrows right circle.png"
+                                        alt=""
+                                    />
+                                </a>
+                                <div class="feedback-debt">
+                                    <div class="total-debt">
+                                        <p>Deuda total</p>
+                                        <h2 class="total-debt-num">
+                                            $111, 400
+                                        </h2>
+                                    </div>
+                                    <div class="payment">
+                                        <div class="payment-container">
+                                            <p>Pago mensual inicial</p>
+                                            <h2 class="debt-num red">
+                                                $2, 616
+                                            </h2>
+                                        </div>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 25 25"
+                                        >
+                                            <path
+                                                style="fill: #ffffff"
+                                                d="m17.5 5.999-.707.707 5.293 5.293H1v1h21.086l-5.294 5.295.707.707L24 12.499l-6.5-6.5z"
+                                                data-name="Right"
+                                            />
+                                        </svg>
+                                        <div
+                                            class="payment-container"
+                                            style="min-width: 146px"
+                                        >
+                                            <p>Pago mensual</p>
+                                            <h2 class="debt-num">$1, 720</h2>
+                                        </div>
+                                    </div>
+                                    <div class="payment-container">
+                                        <p>Deuda pagada en</p>
+                                        <h2 class="debt-num">48 meses</h2>
+                                    </div>
+                                </div>
+                                <h2 class="feedback-conclusion">
+                                    Benjamin ahorró un 33% en sus deudas
                                 </h2>
                             </div>
                         </div>
@@ -765,10 +725,18 @@
                 </div>
                 <div class="swiper-buttons">
                     <div class="swiper-button-next">
-                        <img src="images/swiper-right.png" alt="" />
+                        <img
+                            loading="lazy"
+                            src="images/swiper-right.png"
+                            alt=""
+                        />
                     </div>
                     <div class="swiper-button-prev">
-                        <img src="images/swiper-left.png" alt="" />
+                        <img
+                            loading="lazy"
+                            src="images/swiper-left.png"
+                            alt=""
+                        />
                     </div>
                 </div>
             </div>
@@ -806,67 +774,75 @@
             </section>
 
             <section>
-                <h2 style="max-width: 100%">
-                    Tu camino hacia la libertad financiera
-                </h2>
-                <h3 style="max-width: 450px">
-                    Hacemos que el proceso de alivio de deudas sea simple y sin
-                    estrés. Así es como funciona:
+                <h2 style="max-width: 100%">Tu camino hacia la libertad financiera</h2>
+                <h3>
+                    Hacemos que el proceso de alivio de deuda estudiantil sea simple y sin estrés. Así es como funciona:
                 </h3>
 
                 <div class="steps">
                     <div class="step-card">
                         <div class="step-title">
-                            <img src="images/steps-1.png" alt="" />
+                            <img
+                                loading="lazy"
+                                src="images/steps-1.png"
+                                alt=""
+                            />
                             <h2>Paso 1: Consulta gratuita</h2>
                         </div>
                         <p>
-                            Cuéntanos sobre tu situación de deuda, y nuestros
-                            expertos te proporcionarán un plan personalizado
-                            adaptado a tus necesidades.
+                            Cuéntanos sobre tu situación de deuda, y nuestros expertos te proporcionarán un plan personalizado adaptado a tus necesidades.
                         </p>
                     </div>
                     <div class="step-card">
                         <div class="step-title">
-                            <img src="images/steps-2.png" alt="" />
+                            <img
+                                loading="lazy"
+                                src="images/steps-2.png"
+                                alt=""
+                            />
                             <h2>Paso 2: Revisa tu estimación de ahorros</h2>
                         </div>
                         <p>
-                            Te mostraremos cuánto podrías ahorrar y te daremos
-                            una estrategia para reducir tu deuda.
+                            Te mostraremos cuánto podrías ahorrar y te proporcionaremos la mejor estrategia para reducir tu deuda.
                         </p>
                     </div>
                     <div class="step-card">
                         <div class="step-title">
-                            <img src="images/steps-3.png" alt="" />
+                            <img
+                                loading="lazy"
+                                src="images/steps-3.png"
+                                alt=""
+                            />
                             <h2>Paso 3: Inscríbete en el programa</h2>
                         </div>
                         <p>
-                            Una vez que decidas continuar, nos encargaremos de
-                            las negociaciones y trabajaremos con tus acreedores
-                            en tu nombre.
+                            Una vez que decidas continuar, nos encargaremos de las negociaciones y trabajaremos con tus acreedores en tu nombre.
                         </p>
                     </div>
                     <div class="step-card">
                         <div class="step-title">
-                            <img src="images/steps-4.png" alt="" />
-                            <h2>
-                                Paso 4: Comienzan los pagos mensuales reducidos
-                            </h2>
+                            <img
+                                loading="lazy"
+                                src="images/steps-4.png"
+                                alt=""
+                            />
+                            <h2>Paso 4: Comienzan los pagos mensuales reducidos</h2>
                         </div>
                         <p>
-                            Comienzas a hacer pagos consolidados y asequibles
-                            mientras trabajamos en liquidar tus deudas.
+                            Comienzas a hacer pagos consolidados y asequibles mientras trabajamos en liquidar tus deudas.
                         </p>
                     </div>
                     <div class="step-card">
                         <div class="step-title">
-                            <img src="images/steps-5.png" alt="" />
+                            <img
+                                loading="lazy"
+                                src="images/steps-5.png"
+                                alt=""
+                            />
                             <h2>Paso 5: ¡Deuda resuelta!</h2>
                         </div>
                         <p>
-                            A medida que se alcanzan acuerdos, tus deudas se
-                            liquidan, acercándote a la libertad financiera..
+                            A medida que se alcanzan acuerdos o ajustes, tu carga de préstamos estudiantiles disminuye, acercándote a la libertad financiera.
                         </p>
                     </div>
                 </div>
@@ -885,7 +861,11 @@
                                     <h2 class="review-title">@google</h2>
                                     <div class="review-score">
                                         <p>4.7</p>
-                                        <img src="images/stars.png" alt="" />
+                                        <img
+                                            loading="lazy"
+                                            src="images/stars.png"
+                                            alt=""
+                                        />
                                     </div>
                                     <p class="review-num">12, 000+ opiniones</p>
                                 </div>
@@ -897,7 +877,11 @@
                                     <h2 class="review-title">@trustpilot</h2>
                                     <div class="review-score">
                                         <p>4.6</p>
-                                        <img src="images/stars.png" alt="" />
+                                        <img
+                                            loading="lazy"
+                                            src="images/stars.png"
+                                            alt=""
+                                        />
                                     </div>
                                     <p class="review-num">30, 000+ opiniones</p>
                                 </div>
@@ -911,7 +895,11 @@
                                     </h2>
                                     <div class="review-score">
                                         <p>4.6</p>
-                                        <img src="images/stars.png" alt="" />
+                                        <img
+                                            loading="lazy"
+                                            src="images/stars.png"
+                                            alt=""
+                                        />
                                     </div>
                                     <p class="review-num">10, 000+ opiniones</p>
                                 </div>
@@ -950,8 +938,8 @@
                     <div class="debt-for-card">
                         <img src="images/Vector.svg" alt="" />
                         <p>
-                            <strong>Tienes una deuda significativa</strong>
-                            y estás luchando para mantenerte al día con los
+                            <strong>Tienes una deuda estudiantil alta y</strong>
+                             estás luchando para mantenerte al día con los
                             pagos.
                         </p>
                     </div>
